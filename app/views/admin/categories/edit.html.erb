@@ -1,0 +1,25 @@
+<h2>カテゴリー管理ページ</h2>
+
+<% if flash[:notice] %>
+	<div class="flash">
+		<%= flash[:notice] %>
+	</div>
+<% end %>
+
+<% if @category.errors.any? %>
+	<div>
+		<p><%= @category.errors.full_messages.count %>errors prohibited this category from being saved:</p>
+		<ul><% @category.errors.full_messages.each do |message| %>
+			<li><%= message %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+
+<%= form_for(@category, url: admin_category_path(@category)) do |f| %>
+	<div class="category_name">ジャンル</div>
+	<%= f.text_field :category_name %>
+	<%= f.radio_button :category_status, :掲載中 %>掲載
+	<%= f.radio_button :category_status, :非掲載 %>非掲載
+	<%= f.submit '変更を保存する' %>
+<% end %>

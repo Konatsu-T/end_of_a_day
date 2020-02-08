@@ -1,0 +1,14 @@
+<h2>退会ページ</h2>
+
+<h3>本当に退会しますか？</h3>
+
+<p>退会するとあなたのアカウントはシステムから削除され</p>
+<p>これまでの投稿履歴は閲覧できなくなります。</p>
+<p>退会する場合は「退会する」をクリックしてください。</p>
+
+
+<div>
+<%= link_to "キャンセルする", user_user_path(current_user) %>
+</div>
+<div>
+<%= link_to "退会する", destroy_withdraw_user_user_path(current_user), method: :delete %>

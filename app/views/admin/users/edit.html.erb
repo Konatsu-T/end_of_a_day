@@ -1,0 +1,43 @@
+<h2>ユーザ情報編集</h2>
+
+<% if @user.errors.any? %>
+	<div>
+		<p><%= @user.errors.full_messages.count %>errors prohibited this end_user from being saved:</p>
+		<ul><% @user.errors.full_messages.each do |message| %>
+			<li><%= message %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+<%= attachment_image_tag @user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg", size: '100x100' %>
+<%= form_for(@user, url: admin_user_path(@user)) do |f| %>
+	<table>
+		<tr>
+			<!-- 不適切な写真の場合noimageにする -->
+			<th><%= f.label "プロフィール画像" %></th>
+			<td><%= f.attachment_field :profile_image %></td>
+		</tr>
+		<tr>
+			<th><%= f.label "ユーザ名" %></th>
+			<td><%= f.text_field :name %></td>
+		</tr>
+		<tr>
+			<!-- サイト掲載にふさわしくない言語は削除 -->
+			<th><%= f.label "自己紹介" %></th>
+			<td><%= f.text_area :introduction %></td>
+		</tr>
+			<th><%= f.label "メールアドレス" %></th>
+			<td><%= f.email_field :email %></td>
+		</tr>
+		<tr>
+			<th>ステータス</th>
+			<td>
+				<%= radio_button_tag(:num, "0") %>
+				<%= label_tag(:num_0, "有効会員") %>
+				<%= radio_button_tag(:num, "1") %>
+				<%= label_tag(:num_1, "退会済み") %>
+			</td>
+		</tr>
+	</table>
+	<%= f.submit '変更する' %>
+<% end %>

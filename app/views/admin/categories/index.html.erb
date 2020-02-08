@@ -1,0 +1,50 @@
+<h2>カテゴリ一覧</h2>
+
+<% if flash[:notice] %>
+	<div class="flash">
+		<%= flash[:notice] %>
+	</div>
+<% end %>
+
+<% if @category.errors.any? %>
+	<div>
+		<p><%= @category.errors.full_messages.count %>errors prohibited this category from being saved:</p>
+		<ul><% @category.errors.full_messages.each do |message| %>
+			<li><%= message %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+
+<%= form_for(@category, url: admin_categories_path, method: :post) do |f| %>
+	<div class="category_name">カテゴリー登録</div>
+	<%= f.text_field :category_name %>
+	<%= f.radio_button :category_status, :掲載中 %>掲載
+	<%= f.radio_button :category_status, :非掲載 %>非掲載
+	<%= f.submit '追加する' %>
+<% end %>
+<br>
+
+<table>
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>カテゴリー名</th>
+			<th>掲載状況</th>
+			<th></th>
+			<th></th>
+		</tr>
+	</thead>
+	<% @categories.each do |category| %>
+	<tbody>
+		<tr><td><%= category.id %></td>
+			<td><%= category.category_name %></td>
+			<td><%= category.category_status %></td>
+			<td><%= link_to "編集する", edit_admin_category_path(category) %>
+			</td>
+			<td><%= link_to "削除", admin_category_path(category), method: :delete%>
+			</td>
+		</tr>
+	</tbody>
+	<% end %>
+</table>

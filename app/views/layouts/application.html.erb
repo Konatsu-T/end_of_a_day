@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>End of a day</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <header>
+  <nav>
+    <ul>
+    <% if user_signed_in? %>
+      <li>ユーザー</li>
+      <li><%= link_to "トップ", top_path %></li>
+      <li><%= link_to "アバウト", about_path %></li>
+      <li><%= link_to "投稿一覧", user_posts_path %></li>
+      <li><%= link_to "マイページ", user_user_path(current_user) %></li>
+      <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+    <% elsif admin_signed_in? %>
+      <li>管理者</li>
+      <li><%= link_to "ユーザ一覧", admin_users_path %></li>
+      <li><%= link_to "投稿一覧", admin_posts_path %></li>
+      <li><%= link_to "カテゴリ一覧", admin_categories_path %></li>
+      <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
+    <% else %>
+      <li>ゲストユーザー</li>
+      <li><%= link_to "トップ", top_path %></li>
+      <li><%= link_to "アバウト", about_path %></li>
+      <li><%= link_to "投稿一覧", user_posts_path %></li>
+      <li><%= link_to "ログイン", new_user_session_path %></li>
+      <li><%= link_to "新規登録", new_user_registration_path %></li>
+    <!-- 管理者のログインは/admins/sign_inからアクセスすること -->
+    <% end %>
+    </ul>
+  </nav>
+</header>
+    <%= yield %>
+  </body>
+</html>

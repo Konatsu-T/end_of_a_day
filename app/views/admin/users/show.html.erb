@@ -1,0 +1,25 @@
+<h2>ユーザ情報詳細</h2>
+
+
+<label>会員ID</label>
+<%= @user.id %><br>
+
+<label>ステータス</label>
+<% case @user.deleted? when false %>
+有効会員
+<% when true %>
+退会済
+<% end %><br>
+
+<label><%= attachment_image_tag @user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg", size: '100x100' %></label><br>
+
+<label>ユーザ名</label>
+<%= @user.name %><br>
+
+<label>自己紹介</label>
+<%= @user.introduction %><br>
+
+<label>メールアドレス</label>
+<%= @user.email %><br>
+
+<%= link_to "編集ページへ", edit_admin_user_path(@user) %>

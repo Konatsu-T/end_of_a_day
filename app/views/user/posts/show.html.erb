@@ -1,0 +1,18 @@
+<h2>投稿詳細ページ</h2>
+
+<%= flash[:notice] %><br>
+
+<label>ユーザ名</label>
+<%= @post.user.name %>
+
+<label>カテゴリー</label>
+<%= @post.category.category_name %><br>
+
+<label>タイトル</label>
+<%= @post.title %><br>
+
+<label>エピソード</label>
+<%= @post.body %><br>
+
+<%= link_to "編集する", edit_user_post_path(@post) %>
+<%= link_to "削除する", user_post_path(@post), method: :delete, data: {confirm: "本当に消しますか？"} %>

@@ -1,0 +1,29 @@
+<h2>ユーザ一覧</h2>
+<br>
+<table>
+	<thead>
+		<tr>
+			<th>会員ID</th>
+			<th>プロフィール画像</th>
+			<th>ユーザ名</th>
+			<th>メールアドレス</th>
+			<th>ステータス</th>
+		</tr>
+	</thead>
+	<% @users.each do |user| %>
+	<tbody>
+		<tr>
+			<td><%= user.id %></td>
+			<td><%= attachment_image_tag user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg", size: '100x100' %></td>
+			<td><%= link_to user.name, admin_user_path(user) %></td>
+			<!-- 会員ステータスの表示 -->
+			<td><%= user.email %></td>
+			<% case user.deleted? when false %>
+			<td>有効会員</td>
+			<% when true %>
+			<td>退会済み</td>
+			<% end %>
+	　　　</tr>
+	</tbody>
+	<% end %>
+</table>

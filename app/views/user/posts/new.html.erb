@@ -1,1 +1,17 @@
 <h2>新規投稿ページ</h2>
+あなたの心に残る言葉とそのエピソードを教えてください
+
+<%= form_for(@post, url: user_posts_path, method: :post) do |f| %>
+
+	<%= f.label "タイトル" %>
+	<%= f.text_field :title %><br>
+
+	<%= f.label "カテゴリー" %>
+	<%= f.collection_select :category_id, Category.all, :id, :category_name %>
+
+	<%= f.label "言葉に関するエピソード" %>
+	<%= f.text_area :body %><br>
+
+	<%= f.submit "投稿する" %>
+
+<% end %>

@@ -1,6 +1,5 @@
 class User::PostsController < ApplicationController
 	def new
-		@user = current_user
 		@post = Post.new
 	end
 
@@ -14,8 +13,9 @@ class User::PostsController < ApplicationController
 
 	def create
 		@post = Post.new(post_params)
+		@post.user_id = current_user.id
 		if @post.save
-			redirect_to user_post_path(@post.id), notice: "投稿しました！"
+			redirect_to user_post_path(@post), notice: "投稿しました！"
 		else
 			render :new
 		end
@@ -32,7 +32,7 @@ class User::PostsController < ApplicationController
 
 	def destroy
 		@post = Post.find(params[:id])
-		@post = destroy
+		@post.destroy
 		redirect_to user_posts_path
 	end
 

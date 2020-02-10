@@ -2,7 +2,7 @@
 
 <% if @user.errors.any? %>
 	<div>
-		<p><%= @user.errors.full_messages.count %>errors prohibited this end_user from being saved:</p>
+		<p><%= @user.errors.full_messages.count %>errors prohibited this user from being saved:</p>
 		<ul><% @user.errors.full_messages.each do |message| %>
 			<li><%= message %></li>
 			<% end %>

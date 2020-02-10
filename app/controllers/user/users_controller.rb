@@ -1,9 +1,6 @@
 class User::UsersController < ApplicationController
 	before_action :authenticate_user!
 
-	# コントローラのフォームタグごとにメソッドやアクション固有の認証トークンが追加されます
-	self.per_form_csrf_tokens = true
-
 	def show
 		@user = User.find(params[:id])
 	end
@@ -26,8 +23,8 @@ class User::UsersController < ApplicationController
 
 	def destroy_withdraw
 		@user = User.find(params[:id])
-		if @user.delete
-		redirect_to top_path
+		if @user.destroy
+		redirect_to root_path
 	    else
 	    	render :show
 	    end

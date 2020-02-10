@@ -1,6 +1,7 @@
 class User::PostsController < ApplicationController
 	def new
 		@post = Post.new
+		@posting_category = Category.where(category_status: :掲載中)
 	end
 
 	def index
@@ -13,6 +14,7 @@ class User::PostsController < ApplicationController
 
 	def create
 		@post = Post.new(post_params)
+		@posting_category = Category.where(category_status: :掲載中)
 		@post.user_id = current_user.id
 		if @post.save
 			redirect_to user_post_path(@post), notice: "投稿しました！"
@@ -21,10 +23,16 @@ class User::PostsController < ApplicationController
 		end
 	end
 
+	def edit
+		@post = Post.find(params[:id])
+		@posting_category = Category.where(category_status: :掲載中)
+	end
+
 	def update
 		@post = Post.find(params[:id])
-		if @post.update
-			redirect_to user_post_path(@user)
+		@posting_category = Category.where(category_status: :掲載中)
+		if @post.update(post_params)
+			redirect_to user_post_path(@post)
 		else
 			render :edit
 		end

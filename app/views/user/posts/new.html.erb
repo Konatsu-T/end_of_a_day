@@ -1,13 +1,23 @@
 <h2>新規投稿ページ</h2>
 あなたの心に残る言葉とそのエピソードを教えてください
 
+<% if @post.errors.any? %>
+	<div>
+		<p><%= @post.errors.full_messages.count %>errors prohibited this post from being saved:</p>
+		<ul><% @post.errors.full_messages.each do |message| %>
+			<li><%= message %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+
 <%= form_for(@post, url: user_posts_path, method: :post) do |f| %>
 
 	<%= f.label "タイトル" %>
 	<%= f.text_field :title %><br>
 
 	<%= f.label "カテゴリー" %>
-	<%= f.collection_select :category_id, Category.all, :id, :category_name %>
+	<%= f.collection_select :category_id, @posting_category, :id, :category_name %><br>
 
 	<%= f.label "言葉に関するエピソード" %>
 	<%= f.text_area :body %><br>

@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
-    passwords: 'users/passwords'
-  }
+    passwords: 'users/passwords' }
+
   namespace :user do
     resources :categories, only: [:show]
     resources :users, only: [:show, :edit, :update, :destroy] do

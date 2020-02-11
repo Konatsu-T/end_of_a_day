@@ -6,7 +6,6 @@ class Admin::CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
-    @categories = Category.all
     if @category.save
        redirect_to admin_categories_path, notice: "カテゴリーに「#{@category.category_name}」を登録しました"
     else

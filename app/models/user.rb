@@ -29,7 +29,7 @@ class User < ApplicationRecord
     follower.create(followed_id: user_id)
   end
   # フォローを外す
-  def destroy(user_id)
+  def unfollow(user_id)
     follower.find_by(followed_id: user_id).destroy
   end
   # フォローしていればtrueを返す

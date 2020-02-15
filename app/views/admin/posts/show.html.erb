@@ -1,2 +1,32 @@
-<h1>Admin::Posts#show</h1>
-<p>Find me in app/views/admin/posts/show.html.erb</p>
+<h1>ユーザ投稿詳細</h1>
+
+<% if @post.errors.any? %>
+	<div>
+		<p><%= @post.errors.full_messages.count %>errors prohibited this post from being saved:</p>
+		<ul><% @post.errors.full_messages.each do |message| %>
+			<li><%= message %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+
+<label>ユーザ名</label>
+<%= link_to @post.user.name, admin_user_path(@post.user) %><br>
+
+<label>カテゴリー</label>
+<%= @post.category.category_name %><br>
+
+<label>タイトル</label>
+<%= @post.title %><br>
+
+<label>エピソード</label>
+<%= @post.body %><br>
+
+<!-- 編集ページはない -->
+<%= link_to "不適切な投稿を削除", admin_post_path(@post), method: :delete, data: {confirm: "本当に消しますか？"} %>
+
+
+<br><br>
+---------------------------------
+<br>
+コメント表示、削除

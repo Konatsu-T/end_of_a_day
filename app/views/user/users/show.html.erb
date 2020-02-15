@@ -23,6 +23,8 @@
 
 	<%= link_to "マイページ編集", edit_user_user_path(@user) %><br>
 
+	<%= link_to "これまで投稿した言葉", user_personal_post_path(@user) %>
+
 <!-- 他のユーザの場合 -->
 <% else %>
 	<h2>ユーザ情報</h2>
@@ -45,6 +47,9 @@
 	<% else %>
 		<%= link_to 'フォローする', follow_path(@user.id), method: :post %>
 	<% end %>
+
+	<br>
+	<%= link_to "これまで投稿した言葉", user_personal_post_path(@user) %>
 <% end%>
 
 

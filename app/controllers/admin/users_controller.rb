@@ -22,8 +22,8 @@ class Admin::UsersController < ApplicationController
 		 redirect_to admin_user_path(@user)
 		# 退会済みにする（論理削除）
 		when "1"
-		 @user.delete
-		 redirect_to admin_user_path(@user)
+		 @user.destroy
+		 redirect_to admin_users_path
 		else
 		 render :edit
 		end

@@ -6,7 +6,7 @@ class User::RelationshipsController < ApplicationController
 	end
 
 	def destroy
-		current_user.destroy(params[:id])
+		current_user.unfollow(params[:id])
 		redirect_to request.referer
 	end
 
@@ -18,5 +18,10 @@ class User::RelationshipsController < ApplicationController
 	def followed
 		@user = User.find(params[:user_id])
 		@users = @user.follower_user
+	end
+
+	private
+	def relationship_params
+		params.require(:relationship).permit(:follower_id, :followed_id)
 	end
 end

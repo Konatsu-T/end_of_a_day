@@ -2,17 +2,63 @@
 
 <%= flash[:notice] %><br>
 
-<label>ユーザ名</label>
-<%= @post.user.name %><br>
 
-<label>カテゴリー</label>
+<label><%= attachment_image_tag @post.user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg", size: '100x100' %></label><br>
+
+<label>ユーザ名：</label>
+<%= link_to @post.user.name, user_user_path(@post.user) %><br>
+
+<label>カテゴリー：</label>
 <%= @post.category.category_name %><br>
 
-<label>タイトル</label>
+<label>タイトル：</label>
 <%= @post.title %><br>
 
-<label>エピソード</label>
+<label>エピソード：</label>
 <%= @post.body %><br>
 
-<%= link_to "編集する", edit_user_post_path(@post) %>
-<%= link_to "削除する", user_post_path(@post), method: :delete, data: {confirm: "本当に消しますか？"} %>
+
+<!-- 編集ボタン・削除ボタンの表示 -->
+<% if @post.user == current_user %>
+	<%= link_to "編集する", edit_user_post_path(@post) %> | 
+	<%= link_to "削除する", user_post_path(@post), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"} %>
+<% end %>
+
+<br>
+
+<!-- いいね機能 ここから-->
+<div id="post_<%= @post.id %>">
+	<%= render 'user/posts/favorite', post: @post %>
+</div>
+
+<br>
+
+<!-- コメントが空白の場合のエラーメッセージ -->
+<% if @post_comment.errors.any? %>
+	<div>
+		<div><%= @post_comment.errors.count %> error prohibited this obj from being saved:
+		</div>
+		<ul>
+			<% @post_comment.errors.full_messages.each do |message| %>
+			<li><%= message %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+
+
+<!-- コメント投稿フォーム -->
+<div>
+<h4>コメント</h4>
+<div id="comments_area">
+<!-- 投稿されたコメント一覧を表示するためのrender -->
+<%= render partial: 'user/post_comments/index', locals: { post_comments: @post_comments } %>
+</div>
+
+<% if user_signed_in? %>
+<!-- コメント入力欄を表示するためのrender -->
+<%= render partial: 'user/post_comments/form', locals: { post_comment: @post_comment, post: @post } %>
+<% end %>
+</div>
+
+

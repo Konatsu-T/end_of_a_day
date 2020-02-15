@@ -22,10 +22,11 @@ Rails.application.routes.draw do
       get 'followers' => 'relationships#followed', as: 'followers'
     end
     resources :posts do
-    resource :favorite, only: [:create, :destroy]
-    resources :post_comments, only: [:create, :destroy]
+      resource :favorite, only: [:create, :destroy]
+      resources :post_comments, only: [:create, :destroy]
     end
     resources :relationships, only: [:create, :destroy]
+    get '/posts/personal_post/:id' => 'posts#personal_post', as: 'personal_post'
   end
     # 検索結果表示ページ
     get '/search', to: 'user/searches#search'
@@ -42,5 +43,6 @@ Rails.application.routes.draw do
     resources :post_comments, only: [:destroy]
     end
     root :to => 'homes#top'
+    get '/posts/personal_post/:id' => 'posts#personal_post', as: 'personal_post'
   end
 end

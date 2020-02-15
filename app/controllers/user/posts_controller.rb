@@ -6,10 +6,19 @@ class User::PostsController < ApplicationController
 
 	def index
 		@posts = Post.all
+		@categories = Category.where(category_status: :掲載中)
 	end
 
 	def show
 		@post = Post.find(params[:id])
+		@post_comment = PostComment.new
+		@post_comments = @post.post_comments.order(created_at: :desc) 
+	end
+
+	# 各ユーザごとの投稿一覧
+	def personal_post
+		@user = User.find(params[:id])
+		@posts = Post.all
 	end
 
 	def create
@@ -46,6 +55,6 @@ class User::PostsController < ApplicationController
 
   private
   def post_params
-  	params.require(:post).permit(:user_id, :title, :body, :category_id)
+	params.require(:post).permit(:user_id, :title, :body, :category_id)
   end
 end

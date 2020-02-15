@@ -1,0 +1,6 @@
+<%= form_for([post, post_comment], method: :post, url: user_post_post_comments_path(post), remote: true) do |f| %>
+<div>
+<%= f.text_area :comment, size: "70x4", placeholder: "コメントを入力してください" %>
+</div>
+<div><%= f.submit '送信' %></div>
+<% end %>

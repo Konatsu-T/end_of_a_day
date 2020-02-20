@@ -1,27 +1,43 @@
-<h2>新規投稿ページ</h2>
-あなたの心に残る言葉とそのエピソードを教えてください
+<div  class="container center">
+	<h2><%= image_tag("pen-2.png", size: '40x40', class: "post-icon") %>言葉を投稿する</h2><br>
+	<p>〜あなたの心に残る言葉とそのエピソードを教えてください〜</p><br>
 
-<% if @post.errors.any? %>
-	<div>
-		<p><%= @post.errors.full_messages.count %>errors prohibited this post from being saved:</p>
-		<ul><% @post.errors.full_messages.each do |message| %>
-			<li><%= message %></li>
+	<%= image_tag("newpost.jpeg", size: '300x200', class: "newpost") %>
+
+
+	<% if @post.errors.any? %>
+		<div>
+			<p><%= @post.errors.full_messages.count %>errors prohibited this post from being saved:</p>
+			<ul><% @post.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
 			<% end %>
-		</ul>
+			</ul>
+		</div>
+	<% end %>
+
+	<%= form_for(@post, url: user_posts_path, method: :post) do |f| %>
+	<div class="row post">
+		<div class="form-group col-md-4 col-md-offset-4">
+			<div class="post-title"><%= f.label "タイトル" %></div>
+			<div><%= f.text_field :title, class: "form-control input-lg" %></div>
+		</div>
 	</div>
-<% end %>
-
-<%= form_for(@post, url: user_posts_path, method: :post) do |f| %>
-
-	<%= f.label "タイトル" %>
-	<%= f.text_field :title %><br>
-
-	<%= f.label "カテゴリー" %>
-	<%= f.collection_select :category_id, @posting_category, :id, :category_name %><br>
-
-	<%= f.label "言葉に関するエピソード" %>
-	<%= f.text_area :body %><br>
-
-	<%= f.submit "投稿する" %>
-
-<% end %>
+	<div class="row post">
+		<div class="form-group col-md-4 col-md-offset-4">
+			<div><%= f.label "カテゴリー" %></div>
+			<div><%= f.collection_select :category_id, @posting_category, :id, :category_name, {}, class: "form-control input-lg" %></div>
+		</div>
+	</div>
+	<div class="row post">
+		<div class="form-group col-md-4 col-md-offset-4">
+			<div><%= f.label "言葉にまつわるエピソード" %></div>
+			<div><%= f.text_area :body, class: "form-control input-lg" %></div><br>
+		</div>
+	</div>
+	<div class="row post">
+		<div class="form-group col-md-4 col-md-offset-4">
+			<div><%= f.submit "投稿する", class: "form-control input-lg" %></div>
+		</div>
+	</div>
+	<% end %>
+</div>

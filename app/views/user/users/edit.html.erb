@@ -1,4 +1,5 @@
-<h2>マイページ編集</h2>
+<div  class="container center">
+<h2><i class="far fa-edit"></i> マイページ編集</h2>
 
 <% if @user.errors.any? %>
 	<div>
@@ -10,25 +11,38 @@
 	</div>
 <% end %>
 
-	<%= form_for(@user, url: user_user_path(@user)) do |f| %>
-	<table>
-		<tr>
-			<th><%= f.label "プロフィール画像" %></th>
-			<td><%= f.attachment_field :profile_image %></td>
-		</tr>
-		<tr>
-			<th><%= f.label "ユーザ名" %></th>
-			<td><%= f.text_field :name %></td>
-		</tr>
-		<tr>
-			<th><%= f.label "自己紹介" %></th>
-			<td><%= f.text_area :introduction %></td>
-		</tr>
-			<th><%= f.label "メールアドレス" %></th>
-			<td><%= f.email_field :email %></td>
-		</tr>
-	</table>
-	<%= f.submit '保存する' %>
-	<% end %>
+<%= form_for(@user, url: user_user_path(@user)) do |f| %>
+	<div class="row profile-edit">
+		<div class="form-group col-md-4 col-md-offset-4">
+		<div><%= f.label "プロフィール画像" %></div>
+		<%= f.attachment_field :profile_image, class: "edit-icon" %>
+		</div>
+	</div>
+	<div class="row profile-edit">
+		<div class="form-group col-md-4 col-md-offset-4">
+		<div><%= f.label "ユーザ名" %></div>
+		<%= f.text_field :name, class: "form-control" %>
+		</div>
+	</div>
+	<div class="row profile-edit">
+		<div class="form-group col-md-4 col-md-offset-4">
+		<div><%= f.label "自己紹介" %></div>
+		<%= f.text_area :introduction, class: "form-control" %>
+		</div>
+	</div>
+	<div class="row profile-edit">
+		<div class="form-group col-md-4 col-md-offset-4">
+		<div><%= f.label "メールアドレス" %></div>
+		<%= f.email_field :email, class: "form-control" %>
+		</div>
+	</div>
+	<div class="row profile-edit">
+		<div class="form-group col-md-4 col-md-offset-4">
+		<%= f.submit '保存する', class: "form-control" %>
+		</div>
+	</div>
+<% end %>
+
 <br>
 <%= link_to "退会希望の方はこちら", withdraw_user_user_path(@user) %>
+</div>

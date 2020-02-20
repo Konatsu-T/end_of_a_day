@@ -1,14 +1,4 @@
-<h1>ユーザ投稿詳細</h1>
-
-<% if @post.errors.any? %>
-	<div>
-		<p><%= @post.errors.full_messages.count %>errors prohibited this post from being saved:</p>
-		<ul><% @post.errors.full_messages.each do |message| %>
-			<li><%= message %></li>
-			<% end %>
-		</ul>
-	</div>
-<% end %>
+<h2>ユーザ投稿詳細</h2>
 
 <label>ユーザ名</label>
 <%= link_to @post.user.name, admin_user_path(@post.user) %><br>
@@ -22,11 +12,20 @@
 <label>エピソード</label>
 <%= @post.body %><br>
 
-<!-- 編集ページはない -->
-<%= link_to "不適切な投稿を削除", admin_post_path(@post), method: :delete, data: {confirm: "本当に消しますか？"} %>
+<%= link_to "削除", admin_post_path(@post), method: :delete, data: {confirm: "不適切な投稿として削除します。よろしいですか？"} %>
 
 
 <br><br>
 ---------------------------------
 <br>
-コメント表示、削除
+<!-- コメント件数 -->
+コメント数：<%= @post.post_comments.count %>
+<!-- コメント一覧 -->
+<% @post.post_comments.each do |post_comment| %>
+	<p><%= attachment_image_tag post_comment.user, :profile_image, :fill, 50, 50, fallback: "no_image.jpg", size: '50x50' %>
+	<%= post_comment.user.name %>さん</p>
+	<p>コメント:<%= post_comment.comment %>
+	(<%= post_comment.created_at.strftime('%Y/%m/%d %H:%M:%S') %>)
+	</p>
+	<p><%= link_to "削除", admin_post_post_comment_path(post_comment.post_id, post_comment.id), method: :delete, data: { confirm: '不適切なコメントとして削除します。よろしいですか？' } %></p>
+<% end %>

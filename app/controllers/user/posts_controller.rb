@@ -7,12 +7,14 @@ class User::PostsController < ApplicationController
 	def index
 		@posts = Post.all
 		@categories = Category.where(category_status: :掲載中)
+		# ランキングの表示
+		@all_ranks = Post.find(Favorite.group(:post_id).order(Arel.sql('count(post_id) desc')).limit(5).pluck(:post_id))
 	end
 
 	def show
 		@post = Post.find(params[:id])
 		@post_comment = PostComment.new
-		@post_comments = @post.post_comments.order(created_at: :desc) 
+		@post_comments = @post.post_comments.order(created_at: :desc)
 	end
 
 	# 各ユーザごとの投稿一覧

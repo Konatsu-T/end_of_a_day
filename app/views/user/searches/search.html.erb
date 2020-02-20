@@ -1,6 +1,9 @@
+<div class="container center">
+<h2><i class="fas fa-search"></i> 検索結果</h2>
+</div>
 
-<h3>検索結果</h3>
-<table>
+<div class="container">
+<table class="table">
 	<thead>
 		<tr>
 		<th>ユーザー</th>
@@ -13,12 +16,13 @@
 			<tr>
 				<td>
 				<%= link_to user_user_path(post.user) do %>
-					<%= attachment_image_tag(post.user, :profile_image, :fill, 50, 50, fallback: "no-image.jpg") %>
+					<%= attachment_image_tag(post.user, :profile_image, :fill, 70, 70, fallback: "no-image.jpg") %>
 				<% end %>
 				</td>
-				<td><%= link_to post.title %></td>
-				<td><%= post.body %></td>
+				<td><%= post.title %></td>
+				<td><%= link_to strip_tags(post.body).truncate(30), user_post_path(post) %></td>
 			</tr>
 		<% end %>
 	</tbody>
 </table>
+</div>

@@ -1,34 +1,26 @@
-<h2>カテゴリー詳細ページ</h2>
+<div class="container center">
+	<h2><i class="fas fa-book-open"></i> カテゴリー詳細ページ</h2>
+	<h4>「<%= @category.category_name %>」に関する投稿</h4>
+</div>
 
-<h3>＊カテゴリ一検索</h3>
-<% @categories.each do |category| %>
-	<ul>
-		<li><%= link_to category.category_name, user_category_path(category) %></li>
-	</ul>
-<% end %>
-
-<br>
-
-<p>「<%= @category.category_name %>」に関する投稿一覧</p>
-
-<table>
-	<thead>
-		<tr>
-			<th>投稿日</th>
-			<!-- アイコン -->
-			<th></th>
-			<th>ユーザ名</th>
-			<th>タイトル</th>
-		</tr>
-	</thead>
-	<tbody>
+<div class="container category">
+	<main class="main">
 		<% @category.posts.each do |category| %>
-			<tr>
-				<td><%= category.created_at.strftime("%Y-%m-%d%H:%M") %></td>
-				<td><%= attachment_image_tag category.user, :profile_image, :fill, 50, 50, fallback: "no_image.jpg", size: '50x50' %></td>
-				<td><%= link_to category.user.name, user_user_path(category.user) %></td>
-				<td><%= link_to category.title, user_post_path(category) %></td>
-			</tr>
+			<blockquote>
+			<p><%= link_to category.title, user_post_path(category) %></p>
+				<cite><%= attachment_image_tag category.user, :profile_image, :fill, 35, 35, fallback: "no_image.jpg", size: '35x35' %>
+				<%= link_to category.user.name, user_user_path(category.user) %>/<%= category.created_at.strftime("%Y-%m-%d%H:%M") %></cite>
+		</blockquote>
 		<% end %>
-	</tbody>
-</table>
+	</main>
+
+	<div class="sidebar">
+		<h3><i class="fas fa-book-reader"></i> カテゴリ一検索</h3>
+		<% @categories.each do |category| %>
+			<ul>
+				<li><%= link_to category.category_name, user_category_path(category) %>(
+					<%= category.posts.count %> )</li>
+			</ul>
+		<% end %>
+	</div>
+</div>

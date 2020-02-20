@@ -1,56 +1,47 @@
-<!-- 自分がログインしている場合のページ -->
+<div class="container center">
+<!-- 自分がログインしている場合 -->
 <% if @user == current_user %>
-	<h2>マイページ</h2>
+	<h2><%= image_tag("smile.png", size: '35x35', class: "mypage-icon") %> マイページ</h2>
+<%= flash[:notice] %><br><br>
 
-	<%= flash[:notice] %><br>
-
-	<label><%= attachment_image_tag @user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg", size: '100x100' %></label><br>
-
-	<label>ユーザ名</label>
-	<%= @user.name %><br>
-
-	<label>自己紹介</label>
-	<%= @user.introduction %><br>
-
-	<label>メールアドレス</label>
-	<%= @user.email %><br>
-
-	<label>フォロー</label>
-	<%= link_to @user.follower.count, user_user_follows_path(@user) %><br>
-
-	<label>フォロワー</label>
-	<%= link_to @user.followed.count, user_user_followers_path(@user) %><br>
-
-	<%= link_to "マイページ編集", edit_user_user_path(@user) %><br>
-
-	<%= link_to "これまで投稿した言葉", user_personal_post_path(@user) %>
+<div class="profile">
+	<label><%= attachment_image_tag @user, :profile_image, :fill, 150, 150, fallback: "no_image.jpg", size: '150x150', class: "profile-image" %></label>
+		<dl class="txtwrap2">
+			<dt class="mypage-title">ユーザ名</dt>
+				<dd class="mypage-body"><%= @user.name %></dd>
+			<dt class="mypage-title">自己紹介</dt>
+				<dd class="mypage-body"><%= @user.introduction %></dd>
+			<dt class="mypage-title">メールアドレス</dt>
+				<dd class="mypage-body"><%= @user.email %></dd>
+			<dt class="mypage-title">フォロー数：<%= link_to @user.follower.count, user_user_follows_path(@user) %>
+			フォロワー数：<%= link_to @user.followed.count, user_user_followers_path(@user) %></dt>
+			<dt class="mypage-title"><%= link_to "マイページ編集", edit_user_user_path(@user) %></dt>
+			<dt class="mypage-title"><%= link_to "これまで投稿した言葉", user_personal_post_path(@user) %></dt>
+		</dl>
+</div>
 
 <!-- 他のユーザの場合 -->
 <% else %>
-	<h2>ユーザ情報</h2>
-	<label><%= attachment_image_tag @user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg", size: '100x100' %></label><br>
-
-	<label>ユーザ名</label>
-	<%= @user.name %><br>
-
-	<label>自己紹介</label>
-	<%= @user.introduction %><br>
-
-	<label>フォロー</label>
-	<%= link_to @user.follower.count, user_user_follows_path(@user) %><br>
-
-	<label>フォロワー</label>
-	<%= link_to @user.followed.count, user_user_followers_path(@user) %><br>
-
-	<% if current_user.following?(@user) %>
-		<%= link_to 'フォロー外す', unfollow_path(@user.id), method: :delete %>
-	<% else %>
-		<%= link_to 'フォローする', follow_path(@user.id), method: :post %>
-	<% end %>
-
-	<br>
-	<%= link_to "これまで投稿した言葉", user_personal_post_path(@user) %>
+	<h2><%= image_tag("smile.png", size: '35x35', class: "mypage-icon") %> ユーザ情報</h2>
+		<div class="profile">
+			<label><%= attachment_image_tag @user, :profile_image, :fill, 150, 150, fallback: "no_image.jpg", size: '150x150', class: "profile-image" %></label>
+				<dl class="txtwrap2">
+					<dt class="mypage-title">ユーザ名</dt>
+						<dd class="mypage-body"><%= @user.name %></dd>
+					<dt class="mypage-title">自己紹介</dt>
+						<dd class="mypage-body"><%= @user.introduction %></dd>
+					<dt class="mypage-title"><%= link_to "これまで投稿した言葉", user_personal_post_path(@user) %></dt>
+					<dt class="mypage-title">フォロー数：<%= link_to @user.follower.count, user_user_follows_path(@user) %>
+					フォロワー数：<%= link_to @user.followed.count, user_user_followers_path(@user) %></dt>
+					<% if current_user.following?(@user) %>
+						<dt class="mypage-title"><%= link_to 'フォロー外す', unfollow_path(@user.id), method: :delete, class: "btn btn-primary" %></dt>
+					<% else %>
+						<dt class="mypage-title"><%= link_to 'フォローする', follow_path(@user.id), method: :post, class: "btn btn-danger" %></dt>
+					<% end %>
+				</dl>
+		</div>
 <% end%>
+</div>
 
 
 

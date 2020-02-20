@@ -1,23 +1,28 @@
-<h2>Follower Users</h2>
+<div class="container center">
+	<h2><i class="far fa-handshake"></i> Follower Users</h2><br>
+</div>
+
+<div class="container">
 	<% if @users.count > 0 %>
-	<table>
+	<table class="table">
 		<thead>
 			<tr>
-				<th>Image</th>
-				<th>User</th>
-				<th></th>
+				<th>ユーザ</th>
+				<th>ユーザ名</th>
+				<th>ユーザ情報</th>
 			</tr>
 		</thead>
 		<tbody>
-			<% @users.each do |user| %>
-				<tr>
-					<td><%= attachment_image_tag user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg", size: '100x100' %></td>
-					<td><%= user.name %></td>
-					<td><%= link_to "show", user_user_path(user) %></td>
-			</tr>
-			<% end %>
+		<% @users.each do |user| %>
+		<tr>
+			<td><%= attachment_image_tag user, :profile_image, :fill, 80, 80, fallback: "no_image.jpg", size: '80x80' %></td>
+			<td><%= user.name %> さん</td>
+			<td><%= link_to "詳細を見る", user_user_path(user) %></td>
+		</tr>
+		<% end %>
 		</tbody>
 	</table>
 	<% else %>
-	<p>ユーザーはいません</p>
+		<p>ユーザーはいません</p>
 	<% end %>
+</div>

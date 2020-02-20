@@ -1,4 +1,6 @@
-<h2>投稿編集ページ</h2>
+<div  class="container center">
+
+<h2><%= image_tag("post-edit.png", size: '38x38', class: "mypage-icon") %> 投稿編集ページ</h2>
 
 <% if @post.errors.any? %>
 	<div>
@@ -11,16 +13,28 @@
 <% end %>
 
 <%= form_for(@post, url: user_post_path(@post)) do |f| %>
-
-	<%= f.label "タイトル" %>
-	<%= f.text_field :title %><br>
-
-	<%= f.label "カテゴリー" %>
-	<%= f.collection_select :category_id, @posting_category, :id, :category_name %><br>
-
-	<%= f.label "言葉に関するエピソード" %><br>
-	<%= f.text_area :body %><br>
-
-	<%= f.submit "変更する" %>
-
+	<div class="row post-edit">
+		<div class="form-group col-md-4 col-md-offset-4">
+			<div><%= f.label "タイトル" %></div>
+			<%= f.text_field :title, class: "form-control input-lg" %>
+		</div>
+	</div>
+	<div class="row post-edit">
+		<div class="form-group col-md-4 col-md-offset-4">
+			<div><%= f.label "カテゴリー" %></div>
+			<%= f.collection_select :category_id, @posting_category, :id, :category_name, {}, class: "form-control input-lg" %>
+		</div>
+	</div>
+	<div class="row post-edit">
+		<div class="form-group col-md-4 col-md-offset-4">
+			<div><%= f.label "言葉に関するエピソード" %></div>
+			<%= f.text_area :body, class: "form-control input-lg" %>
+		</div>
+	</div>
+	<div class="row post-edit">
+		<div class="form-group col-md-4 col-md-offset-4">
+			<%= f.submit "変更する", class: "form-control input-lg" %>
+		</div>
+	</div>
 <% end %>
+</div>

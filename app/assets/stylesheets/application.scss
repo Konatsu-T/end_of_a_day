@@ -1,0 +1,338 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
+
+body {
+	background-color: #f7f6f4;
+}
+
+.header {
+	display:flex;
+	list-style: none;
+	justify-content: center;
+	padding: 10px 20px;
+	font-size: 1.1em;
+	a:visited { color:#333; text-decoration:none }
+}
+
+ul {
+	font-family: 'Noto Sans JP', sans-serif;
+	margin: 25px;
+}
+
+h2 {
+	margin-bottom: 20px;
+}
+
+.nav-list {
+	margin: 0 20px;
+}
+
+.top {
+	margin-right: auto;
+	margin-left: auto;
+	width: 84%;
+	background-image: url(test-image.jpg);
+	background-size: cover;
+	background-position: center;
+	height: 650px;
+}
+
+.top-title {
+	font-family: 'Playfair Display', serif;
+	color: #fff;
+	font-size: 3.5em;
+	padding: 30px;
+	margin: 20px;
+}
+
+.top-text {
+	font-family: 'Noto Sans JP', sans-serif;
+	font-size: 1.2em;
+	color: #FFFAF0;
+	a:visited { color:white; text-decoration:none }
+	padding: 10px 10px 10px 50px;
+}
+
+.center {
+	font-family: 'Noto Sans JP', sans-serif;
+	font-size: 1.1em;
+	text-align: center;
+}
+
+.newpost {
+	background-size: cover;
+	background-position: center;
+}
+
+.post-icon, .mypage-icon {
+	vertical-align: bottom;
+}
+
+.post, .profile-edit, .row.post-edit {
+	padding: 10px;
+}
+
+.profile {
+ 	display: flex;
+ 	justify-content: center;
+}
+
+.txtwrap2 {
+	margin-left: 20px;
+	text-align: left;
+}
+
+.mypage-title {
+	line-height: 2.5;
+}
+
+.mypage-body {
+	padding-bottom: 12px;
+}
+
+.withdraw {
+	margin :20px;
+}
+
+.container.personal {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.personal-post {
+    border: solid 3px #b99877;/*線*/
+    border-radius: 10px;/*角の丸み*/
+	margin: 10px;
+	padding: 10px;
+	text-align: center;
+	width: 250px;
+	height: 220px;
+}
+
+.far.fa-comment-dots {
+	font-size: 40px;
+}
+
+.personal-word {
+	font-weight: bold;
+	a:visited { color: #333; text-decoration:none }
+	font-size: 1.5em;
+	margin: 10px 0 10px 0;
+	padding: 10px 0 10px 0;
+}
+
+.personal-word2 {
+	margin: 10px 0 10px 0;
+	padding: 10px 0 10px 0;
+}
+
+.word-box {
+    padding: 15px;
+    margin: 0 auto;
+    color: #565656;
+    background: #EBF2D7;
+    box-shadow: 0px 0px 0px 10px #EBF2D7;
+    border: dashed 2px #B1CD64;
+    border-radius: 8px;
+    width: 450px;
+   }
+
+.post-comment {
+	background: #FFF;
+	margin: 0 auto;
+	width: 450px;
+}
+.comment-count {
+	margin: 0 auto;
+	width: 450px;
+	text-align: left;
+}
+
+.container.category {
+	display: flex;
+}
+
+.main {
+  flex: 1 0 auto;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 10px 10px 150px;
+}
+
+.sidebar {
+  background: #f1e8e0;
+  height: 350px;
+  width: 350px;
+  font-size: 1.1em;
+  a:visited { color:#333; text-decoration:none }
+  border: solid 2px #b99877;/*線*/
+  border-radius: 10px;/*角の丸み*/
+}
+
+.sidebar ul {
+	list-style: none;
+	padding: 8px 0px;
+	border-bottom: 2px #b99877 dotted;
+	letter-spacing: 0.2em; /* 字間を広げる */
+}
+
+.sidebar h3 {
+	text-align: center;
+}
+
+.fa-book-reader {
+	vertical-align: top;
+}
+
+blockquote {
+    position: relative;
+    padding: 35px 15px 10px 15px;
+    box-sizing: border-box;
+    background: #fffefbdb;
+    border-left: 4px solid #b99877;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.14);
+}
+
+blockquote:before{
+    display: inline-block;
+    position: absolute;
+    top: 5px;
+    left: 3px;
+    content: "“";
+    font-family: sans-serif;
+    color: #b99877;
+    font-size: 90px;
+    line-height: 1;
+}
+
+blockquote p {
+    padding: 10px;
+    margin: 10px;
+    line-height: 1.7;
+    font-size: 1.1em;
+    a:visited { color:#333;; text-decoration:none }
+}
+
+blockquote cite {
+    display: block;
+    text-align: right;
+    color: #888888;
+    font-size: 0.9em;
+    a:visited { color:#888888; text-decoration:none }
+}
+
+.post-sidebar {
+  height: 900px;
+  font-size: 1.1em;
+  a:visited { color:#333; text-decoration:none }
+}
+
+.sidebar3 ul {
+	list-style: none;
+	padding: 8px 0px;
+	border-bottom: 2px #b99877 dotted;
+	letter-spacing: 0.1em; /* 字間を広げる */
+	margin: 20px 25px;
+}
+
+.post-sidebar h3 {
+	text-align: center;
+}
+
+.sidebar2 ul {
+    padding: 8px 0px;
+	list-style: none;
+	border-bottom: 2px #b99877 dotted;
+	letter-spacing: 0.1em; /* 字間を広げる */
+	margin: 20px 25px;
+}
+
+.sidebar1 {
+    background: #f1e8e0;
+	border: solid 2px #b99877;/*線*/
+    border-radius: 10px;/*角の丸み*/
+}
+
+.sidebar2 {
+	background: #f1e8e0;
+	border: solid 2px #b99877;/*線*/
+    border-radius: 10px;/*角の丸み*/
+}
+
+.sidebar3 {
+	background: #f1e8e0;
+	border: solid 2px #b99877;/*線*/
+    border-radius: 10px;/*角の丸み*/
+}
+
+.main-index {
+  flex: 1 0 auto;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+}
+
+.index {
+	margin: 0px 0px 15px 0px;
+}
+.index li {
+  position: relative;
+  list-style-type: none!important;
+  padding: 1em;
+  margin: 0px 10px 5px 10px;
+  line-height: 1.5;
+  background: #efebe8;
+  vertical-align: middle;
+  color: #505050;
+  border-radius: 15px 0px 0px 15px;/*左側の角丸く*/
+  font-size: 1.1em;
+  font-weight: bold;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.14);
+}
+
+.index li:before{ 
+  display:inline-block; 
+  vertical-align: middle;
+  /*以下白丸つくる*/
+  content:'';
+  width:1em;
+  height: 1em;
+  background: #fff;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.index li img {
+	padding:10px;
+}
+
+.index-title {
+ 	a:visited { color:#333; text-decoration:none }
+	color: #333;
+	font-size: 1.2em;
+	padding: 0px 0px 0px 60px;
+}
+
+.index-category {
+	text-align: right;
+}
+
+.index-user {
+	text-align: right;
+}

@@ -1,51 +1,52 @@
-<h2>投稿一覧ページ</h2>
+<div class="container center">
+	<h2><i class="fas fa-book-open"></i> 投稿一覧ページ</h2>
+</div>
 
-<br>
 
-<h3>＊週間ランキング（いいねの多い投稿順）</h3>
+<div class="container category">
+<main class="main-index">
 
-<br>
-
-<h3>＊カテゴリ一検索</h3>
-<% @categories.each do |category| %>
-	<ul>
-		<li><%= link_to category.category_name, user_category_path(category) %>：
-		<%= category.posts.count %>件
-		</li>
-	</ul>
+<% @posts.each do |post| %>
+<ul class="index">
+<li>
+<div class="index-title">「<%= link_to post.title, user_post_path(post) %>」</div>
+<div class="index-category">カテゴリー:<%= post.category.category_name %></div>
+<div class="index-user"><%= attachment_image_tag post.user, :profile_image, :fill, 65, 65, fallback: "no_image.jpg", size: '65x65' %>
+<%= link_to post.user.name, user_user_path(post.user) %>
+<%= post.created_at.strftime("%Y-%m-%d%H:%M") %></div>
+</li>
+</ul>
 <% end %>
+</main>
 
-<br>
-
-<h3>＊キーワード検索バー</h3>
-<%= form_tag(search_path, method: :get) do %>
-	<%= text_field_tag :search %>
-	<%= select_tag(:choice, options_for_select([["部分一致", "1" ],["後方一致", "2" ],["前方一致", "3" ],["完全一致", "4" ]])) %>
-	<%= submit_tag "検索", :name => nil %>
-<% end %>
-
-<br>
-
-<table>
-	<thead>
-		<tr>
-			<th>投稿日</th>
-			<!-- アイコン -->
-			<th></th>
-			<th>ユーザ名</th>
-			<th>タイトル</th>
-			<th>カテゴリー</th>
-		</tr>
-	</thead>
-	<tbody>
-		<% @posts.each do |post| %>
-			<tr>
-				<td><%= post.created_at.strftime("%Y-%m-%d%H:%M") %></td>
-				<td><%= attachment_image_tag post.user, :profile_image, :fill, 50, 50, fallback: "no_image.jpg", size: '50x50' %></td>
-				<td><%= link_to post.user.name, user_user_path(post.user) %></td>
-				<td><%= link_to post.title, user_post_path(post) %></td>
-				<td><%= post.category.category_name %></td>
-			</tr>
-		<% end %>
-	</tbody>
-</table>
+	<div class="post-sidebar">
+		<div class="sidebar1">
+			<h3><i class="fas fa-search"></i> 投稿を検索する</h3>
+				<%= form_tag(search_path, method: :get, class: "navbar-form") do %>
+				<%= text_field_tag :search, "", class: "form-control", placeholder: "キーワードを入力" %>
+				<%= select_tag(:choice, options_for_select([["部分一致", "1" ],["後方一致", "2" ],["前方一致", "3" ],["完全一致", "4" ]]), class: "form-control") %>
+				<%= submit_tag "検索", :name => nil, class: "btn btn-info" %>
+			<% end %>
+		</div>
+		<br>
+		<div class="sidebar2">
+			<h3><i class="fas fa-crown"></i> いいね数ランキング</h3>
+				<% @all_ranks.each.with_index(1) do |post, i| %>
+				<ul>
+					<li class="rank"><%= "第#{i}位" %>: 
+					<%= link_to post.title, user_post_path(post) %></li>
+				</ul>
+			<% end %>
+		</div>
+		<br>
+		<div class="sidebar3">
+			<h3><i class="fas fa-book-reader"></i> カテゴリ一別検索</h3>
+			<% @categories.each do |category| %>
+				<ul>
+					<li><%= link_to category.category_name, user_category_path(category) %>
+					( <%= category.posts.count %> )
+					</li>
+				</ul>
+			<% end %>
+		</div>
+	</div>

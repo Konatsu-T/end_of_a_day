@@ -1,12 +1,6 @@
-<h2>トップページ</h2>
-
-TOPの画像が入る。投稿する・探すボタンがある。
-
-<%= link_to "投稿する", new_user_post_path %>
-<%= link_to "検索する" %>
-
-<ul>
-	<li>ヘッダーのメニューはログイン前後で変えること</li>
-	<li>ログイン後は再度この画面に遷移する</li>
-	<li>ログインしなくても投稿一覧へ進める</li>
-</ul>
+<div class="top">
+	<h2 class="top-title">End of a day ...</h2>
+	<p class="top-text">今日はどんな時間を過ごしますか？</p>
+	<div class="top-text"><%= link_to image_tag("pen.png", size: '40x40', class: "top-link")+ " 投稿する", new_user_post_path %></div>
+	<div class="top-text"><%= link_to image_tag("book.png", size: '40x40', class: "top-link")+ " 投稿を見る", user_posts_path %></div>
+</div>

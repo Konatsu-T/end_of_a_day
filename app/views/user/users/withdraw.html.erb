@@ -1,14 +1,16 @@
-<h2>退会ページ</h2>
+<div  class="container center">
+	<h2><i class="fas fa-exclamation-triangle"></i> 退会ページ</h2><br>
 
-<h3>本当に退会しますか？</h3>
+	<h3 class="withdraw">本当に退会しますか？</h3>
 
-<p>退会するとあなたのアカウントはシステムから削除され</p>
-<p>これまでの投稿履歴は閲覧できなくなります。</p>
-<p>退会する場合は「退会する」をクリックしてください。</p>
+	<p class="withdraw">退会するとあなたのアカウントはシステムから削除され、</p>
+	<p class="withdraw">これまでの投稿履歴は閲覧できなくなります。</p>
+	<p class="withdraw">退会する場合は「退会する」をクリックしてください。</p>
 
-
-<div>
-<%= link_to "キャンセルする", user_user_path(current_user) %>
+	<div class="withdraw">
+		<%= link_to "キャンセルする", user_user_path(current_user) %>
+	</div>
+	<div class="withdraw">
+		<%= link_to "退会する", destroy_withdraw_user_user_path(current_user), method: :delete %>
+	</div>
 </div>
-<div>
-<%= link_to "退会する", destroy_withdraw_user_user_path(current_user), method: :delete %>

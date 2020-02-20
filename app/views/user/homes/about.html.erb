@@ -1,3 +1,51 @@
-<h2>Aboutページ</h2>
+<div  class="container center">
+	<h2><%= image_tag("heart.png", size: '30x30', class: "heart") %> ABOUT</h2>
+</div>
 
-※サイトの説明や使い方が入ります※
+<ul class="about">
+	<li class="about-title"></li>
+		<p><%= image_tag("about1.jpeg", size: '480x320', class: "about-pic") %></p>
+		<p>誰かの心に寄り添えるような言葉を届けよう</p>
+		<p class="about-txt">誰にでも心に残る言葉があるのではないでしょうか。それは歴史上の偉人の名言だけでなく、家族・友人など身近な人の一言に元気をもらったり救われたり・・このような経験も多くあるかと思います。ステキな言葉に出会った日、１日を振り返り、その言葉を共有しあうことで、心を癒し元気を補給できるきっかけになればという想いを込めました。</p>
+	<li class="about-title"></li>
+		<p><%= image_tag("about2.jpeg", size: '480x320', class: "about-pic") %></p>
+		<p>サイトの使い方</p>
+		<p class="about-txt">笑顔や元気をくれた言葉・背中を押してもらった言葉・感動した言葉など、ご自身のエピソードとともに投稿してください。
+		もちろん、SNSや本で見つけた有名人などの言葉でもOKです。投稿された言葉にはコメントやリアクションが残せたり、検索もできます。自分自身のできごとが、誰かの一日を少しだけ良い日に変えられるとしたら幸せですよね！ステキな言葉が溢れるコミュニティとなりますように。</p>
+</ul>
+
+
+<style>
+
+	.heart {
+		vertical-align: bottom;
+	}
+ 	.about {
+        max-width: 600px;
+        font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    .about .about-title {
+        display: flex;
+        align-items: center;
+    }
+
+    .about .about-title .about-pic,
+    .about .about-title .about-txt {
+        width: 50%;
+        box-sizing: border-box;
+    }
+
+    .about .about-title:nth-child(odd) {
+        flex-direction: row-reverse;
+    }
+
+     .about .about-title:nth-child(odd) .about-txt {
+        padding-right: 10px;
+    }
+
+    .about .about-title:nth-child(even) .about-txt {
+        padding-right: 10px;
+    }
+</style>
+

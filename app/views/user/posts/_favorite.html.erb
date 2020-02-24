@@ -1,18 +1,19 @@
-<!-- いいね機能 ここから-->
-<% if post.favorited_by?(current_user) %>
-	<!-- 投稿に付いたいいねに自分が含まれているとき -->
-	<td>
-		<%= link_to user_post_favorite_path(post), method: :delete, remote: true do %>
-			<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
-			<%= post.favorites.count %>いいね
-		<% end %>
-	</td>
+<!-- ログインしているユーザのみいいねができる -->
+<% if user_signed_in? %>
+	<% if post.favorited_by?(current_user) %>
+		<!-- 投稿に付いたいいねに自分が含まれているとき -->
+			<%= link_to user_post_favorite_path(post), method: :delete, remote: true do %>
+				<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+				<%= post.favorites.count %>いいね
+			<% end %>
+	<% else %>
+		<!-- 投稿に付いたいいねに自分が含まれないとき -->
+			<%= link_to user_post_favorite_path(post), method: :post, remote: true do %>
+				<i class="fa fa-heart-o" aria-hidden="true"></i>
+				<%= post.favorites.count %>いいね
+			<% end %>
+	<% end %>
 <% else %>
-	<!-- 投稿に付いたいいねに自分が含まれないとき -->
-	<td>
-		<%= link_to user_post_favorite_path(post), method: :post, remote: true do %>
-			<i class="fa fa-heart-o" aria-hidden="true"></i>
-			<%= post.favorites.count %>いいね
-		<% end %>
-	</td>
+	<!-- ログインしていない時はいいね数のみの表示 -->
+	<%= post.favorites.count %>いいね
 <% end %>

@@ -4,41 +4,64 @@
     <title>End of a day</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <%= favicon_link_tag('favicon.ico') %>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://kit.fontawesome.com/6bfebc90e8.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700i&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/6bfebc90e8.js" crossorigin="anonymous"></script>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-      <nav>
-        <ul class="header">
-        <% if user_signed_in? %>
-          <li><%= current_user.name %>さん、ようこそ！</li>
-          <li><%= link_to "トップ", root_path, class: "nav-list" %></li>
-          <li><%= link_to "サイトについて", about_path, class: "nav-list" %></li>
-          <li><%= link_to "投稿を見る", user_posts_path, class: "nav-list" %></li>
-          <li><%= link_to "マイページ", user_user_path(current_user), class: "nav-list" %></li>
-          <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-list" %></li>
-        <% elsif admin_signed_in? %>
-          <li>管理者ページ</li>
-          <li><%= link_to "トップ", admin_root_path, class: "nav-list" %></li>
-          <li><%= link_to "ユーザ一覧", admin_users_path, class: "nav-list" %></li>
-          <li><%= link_to "投稿一覧", admin_posts_path, class: "nav-list" %></li>
-          <li><%= link_to "カテゴリ一覧", admin_categories_path, class: "nav-list" %></li>
-          <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-list" %></li>
-        <% else %>
-          <li>ゲストユーザーさん、ようこそ！</li>
-          <li><%= link_to "トップ", root_path, class: "nav-list" %></li>
-          <li><%= link_to "サイトについて", about_path, class: "nav-list" %></li>
-          <li><%= link_to "ログイン", new_user_session_path, class: "nav-list" %></li>
-          <li><%= link_to "新規登録", new_user_registration_path, class: "nav-list" %></li>
-        <!-- 管理者のログインは/admins/sign_inからアクセスすること -->
-        <% end %>
-        </ul>
-      </nav>
+
+
+    <div class="ham" id="ham">
+        <span class="ham_line ham_line1"></span>
+        <span class="ham_line ham_line2"></span>
+        <span class="ham_line ham_line3"></span>
+    </div>
+
+<div class="menu_wrapper" id="menu_wrapper">
+          <nav class="menu">
+            <ul class="header">
+            <% if user_signed_in? %>
+              <li><%= flash[:notice] %>  </li>
+              <li><%= current_user.name %>さん、ようこそ！</li>
+              <li><%= link_to "トップ", root_path, class: "nav-list" %></li>
+              <li><%= link_to "サイトについて", about_path, class: "nav-list" %></li>
+              <li><%= link_to "投稿を見る", user_posts_path, class: "nav-list" %></li>
+              <li><%= link_to "投稿する", new_user_post_path, class: "nav-list" %></li>
+              <li><%= link_to "マイページ", user_user_path(current_user), class: "nav-list" %></li>
+              <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-list" %></li>
+            <% elsif admin_signed_in? %>
+              <li>管理者</li>
+              <li><%= link_to "トップ", admin_root_path, class: "nav-list" %></li>
+              <li><%= link_to "ユーザ一覧", admin_users_path, class: "nav-list" %></li>
+              <li><%= link_to "投稿一覧", admin_posts_path, class: "nav-list" %></li>
+              <li><%= link_to "カテゴリ一覧", admin_categories_path, class: "nav-list" %></li>
+              <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-list" %></li>
+            <% else %>
+              <li>ゲストユーザーさん、ようこそ！</li>
+              <li><%= link_to "トップ", root_path, class: "nav-list" %></li>
+              <li><%= link_to "サイトについて", about_path, class: "nav-list" %></li>
+              <li><%= link_to "投稿を見る", user_posts_path, class: "nav-list" %></li>
+              <li><%= link_to "ログイン", new_user_session_path, class: "nav-list" %></li>
+              <li><%= link_to "新規登録", new_user_registration_path, class: "nav-list" %></li>
+            <!-- 管理者のログインは/admins/sign_inからアクセスすること -->
+            <% end %>
+            </ul>
+          </nav>
+    </div>
     <%= yield %>
   </body>
 </html>
+
+<script>
+  const ham = document.getElementById('ham');
+  const menu_wrapper = document.getElementById('menu_wrapper');
+  ham.addEventListener('click', function() {
+    ham.classList.toggle('clicked');
+    menu_wrapper.classList.toggle('clicked');
+  });
+</script>

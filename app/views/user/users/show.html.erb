@@ -1,8 +1,8 @@
 <div class="container center">
 <!-- 自分がログインしている場合 -->
 <% if @user == current_user %>
-	<h2><%= image_tag("smile.png", size: '35x35', class: "mypage-icon") %> マイページ</h2>
-<%= flash[:notice] %><br><br>
+	<h2><i class="fas fa-star"></i> マイページ</h2>
+<%= flash[:user_edit] %><br><br>
 
 <div class="profile">
 	<label><%= attachment_image_tag @user, :profile_image, :fill, 150, 150, fallback: "no_image.jpg", size: '150x150', class: "profile-image" %></label>
@@ -10,7 +10,7 @@
 			<dt class="mypage-title">ユーザ名</dt>
 				<dd class="mypage-body"><%= @user.name %></dd>
 			<dt class="mypage-title">自己紹介</dt>
-				<dd class="mypage-body"><%= @user.introduction %></dd>
+				<dd class="mypage-body"><%= simple_format(@user.introduction) %></dd>
 			<dt class="mypage-title">メールアドレス</dt>
 				<dd class="mypage-body"><%= @user.email %></dd>
 			<dt class="mypage-title">フォロー数：<%= link_to @user.follower.count, user_user_follows_path(@user) %>

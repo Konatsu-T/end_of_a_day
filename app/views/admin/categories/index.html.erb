@@ -1,10 +1,9 @@
-<h2>カテゴリ一覧</h2>
 
-<% if flash[:notice] %>
-	<div class="flash">
-		<%= flash[:notice] %>
-	</div>
-<% end %>
+<div class="container center">
+	<h2><i class="fas fa-book-open"></i> カテゴリ一覧</h2>
+
+	<%= flash[:category] %>
+	<%= flash[:category_edit] %>
 
 <% if @category.errors.any? %>
 	<div>
@@ -17,27 +16,27 @@
 <% end %>
 
 <%= form_for(@category, url: admin_categories_path, method: :post) do |f| %>
-	<div class="category_name">カテゴリー登録</div>
-	<%= f.text_field :category_name %>
-	<%= f.radio_button :category_status, :掲載中 %>掲載
-	<%= f.radio_button :category_status, :非掲載 %>非掲載
-	<%= f.submit '追加する' %>
+	<div class="category_name">カテゴリー登録
+		<%= f.text_field :category_name %>
+		<%= f.radio_button :category_status, :掲載中 %>掲載
+		<%= f.radio_button :category_status, :非掲載 %>非掲載
+		<%= f.submit '追加する', class: "btn btn-success" %>
+	</div>
 <% end %>
 <br>
 
-<table>
+<table class="table table-hover">
 	<thead>
 		<tr>
-			<th>ID</th>
-			<th>カテゴリー名</th>
-			<th>掲載状況</th>
+			<th></th>
+			<th></th>
 			<th></th>
 			<th></th>
 		</tr>
 	</thead>
 	<% @categories.each do |category| %>
 	<tbody>
-		<tr><td><%= category.id %></td>
+		<tr>
 			<td><%= category.category_name %></td>
 			<td><%= category.category_status %></td>
 			<td><%= link_to "編集する", edit_admin_category_path(category) %>
@@ -48,3 +47,5 @@
 	</tbody>
 	<% end %>
 </table>
+
+</div>

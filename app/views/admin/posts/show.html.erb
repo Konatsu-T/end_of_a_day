@@ -1,31 +1,30 @@
-<h2>ユーザ投稿詳細</h2>
+<div class="container center">
+	<h2><i class="fab fa-pagelines"></i> <%= @post.user.name %>さんの投稿</h2>
 
-<label>ユーザ名</label>
-<%= link_to @post.user.name, admin_user_path(@post.user) %><br>
-
-<label>カテゴリー</label>
-<%= @post.category.category_name %><br>
-
-<label>タイトル</label>
-<%= @post.title %><br>
-
-<label>エピソード</label>
-<%= @post.body %><br>
-
-<%= link_to "削除", admin_post_path(@post), method: :delete, data: {confirm: "不適切な投稿として削除します。よろしいですか？"} %>
-
-
-<br><br>
----------------------------------
+		<div class="word-box">
+			<div class="personal-word"><%= @post.title %></div>
+			<div class="personal-word1"><%= simple_format(@post.body) %></div>
+			<div class="personal-word2"><%= @post.category.category_name %></div>
+			ユーザ：<%= link_to @post.user.name, admin_user_path(@post.user) %><br>
+			<div class="personal-word2">
+			<%= link_to "削除", admin_post_path(@post), method: :delete, data: {confirm: "不適切な投稿として削除します。よろしいですか？"} %>
+			</div>
+		</div>
 <br>
-<!-- コメント件数 -->
-コメント数：<%= @post.post_comments.count %>
-<!-- コメント一覧 -->
-<% @post.post_comments.each do |post_comment| %>
-	<p><%= attachment_image_tag post_comment.user, :profile_image, :fill, 50, 50, fallback: "no_image.jpg", size: '50x50' %>
-	<%= post_comment.user.name %>さん</p>
-	<p>コメント:<%= post_comment.comment %>
-	(<%= post_comment.created_at.strftime('%Y/%m/%d %H:%M:%S') %>)
-	</p>
-	<p><%= link_to "削除", admin_post_post_comment_path(post_comment.post_id, post_comment.id), method: :delete, data: { confirm: '不適切なコメントとして削除します。よろしいですか？' } %></p>
-<% end %>
+<br>
+	<!-- コメント件数 -->
+	<div class="comment-count">
+		<i class="far fa-comments"></i> コメント数：<%= @post.post_comments.count %>
+	</div>
+	<div class="post-comment">
+		<!-- コメント一覧 -->
+		<% @post.post_comments.each do |post_comment| %>
+			<p><%= attachment_image_tag post_comment.user, :profile_image, :fill, 30, 30, fallback: "no_image.jpg", size: '30x30' %>
+			<%= post_comment.user.name %>さん</p>
+			<p class="comment-txt"><%= post_comment.comment %>
+			(<%= post_comment.created_at.strftime('%Y/%m/%d %H:%M:%S') %>)
+			<%= link_to "削除", admin_post_post_comment_path(post_comment.post_id, post_comment.id), method: :delete, data: { confirm: '不適切なコメントとして削除します。よろしいですか？' } %>
+			</p>
+		<% end %>
+	</div>
+</div>

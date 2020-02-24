@@ -1,4 +1,5 @@
 class User::RelationshipsController < ApplicationController
+	before_action :authenticate_user!
 
 	def create
 		current_user.create(params[:id])

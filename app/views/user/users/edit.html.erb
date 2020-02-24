@@ -27,7 +27,7 @@
 	<div class="row profile-edit">
 		<div class="form-group col-md-4 col-md-offset-4">
 		<div><%= f.label "自己紹介" %></div>
-		<%= f.text_area :introduction, class: "form-control" %>
+		<%= f.text_area :introduction, class: "form-control", :size => "5x5"%>
 		</div>
 	</div>
 	<div class="row profile-edit">
@@ -37,8 +37,8 @@
 		</div>
 	</div>
 	<div class="row profile-edit">
-		<div class="form-group col-md-4 col-md-offset-4">
-		<%= f.submit '保存する', class: "form-control" %>
+		<div class="form-group col-md-6 col-md-offset-3">
+		<%= f.submit '保存する', class: "simple_square_btn5" %>
 		</div>
 	</div>
 <% end %>

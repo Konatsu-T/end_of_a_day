@@ -2,7 +2,7 @@ class User::CategoriesController < ApplicationController
   def show
   	@categories = Category.where(category_status: :掲載中)
   	@category = Category.find(params[:id])
-  	@category.posts
+  	@category_posts = @category.posts.page(params[:page]).reverse_order
   end
 
   def category_params

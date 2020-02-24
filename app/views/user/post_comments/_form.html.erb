@@ -1,11 +1,13 @@
-<%= form_for([post, post_comment], method: :post, url: user_post_post_comments_path(post), remote: true) do |f| %>
-	<div class="row profile-edit">
-		<div class="form-group col-md-6 col-md-offset-3">
-			<%= f.text_area :comment, size: "50x5", placeholder: "コメントを入力してください", class: "form-control" %>
+<% if user_signed_in? %>
+	<%= form_for([post, post_comment], method: :post, url: user_post_post_comments_path(post), remote: true) do |f| %>
+		<div class="row comment-form">
+			<div class="form-group col-md-6 col-md-offset-3">
+				<%= f.text_area :comment, size: "45x3", placeholder: "コメントを入力してください", class: "form-control" %>
+			</div>
 		</div>
-	</div>
-	<div class="row profile-edit">
-		<div class="form-group col-md-2 col-md-offset-5"><%= f.submit 'コメントする', class: "form-control btn btn-warning" %>
+		<div class="row comment-submit">
+			<div class="form-group col-md-2 col-md-offset-5"><%= f.submit 'コメントする', class: "simple_square_btn5" %>
+			</div>
 		</div>
-	</div>
+	<% end %>
 <% end %>

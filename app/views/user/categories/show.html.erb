@@ -4,23 +4,33 @@
 </div>
 
 <div class="container category">
-	<main class="main">
-		<% @category.posts.each do |category| %>
-			<blockquote>
-			<p><%= link_to category.title, user_post_path(category) %></p>
-				<cite><%= attachment_image_tag category.user, :profile_image, :fill, 35, 35, fallback: "no_image.jpg", size: '35x35' %>
-				<%= link_to category.user.name, user_user_path(category.user) %>/<%= category.created_at.strftime("%Y-%m-%d%H:%M") %></cite>
-		</blockquote>
-		<% end %>
-	</main>
-
-	<div class="sidebar">
-		<h3><i class="fas fa-book-reader"></i> カテゴリ一検索</h3>
-		<% @categories.each do |category| %>
-			<ul>
-				<li><%= link_to category.category_name, user_category_path(category) %>(
-					<%= category.posts.count %> )</li>
+	<main class="main-index">
+		<% if @category.posts.count > 0 %>
+		<% @category_posts.each do |category| %>
+			<ul class="index">
+				<li>
+					<div class="index-title"><%= link_to category.title, user_post_path(category) %></div>
+					<div class="index-user">
+					<%= link_to category.user.name, user_user_path(category.user) %>さん  
+					<%= category.created_at.strftime("%Y-%m-%d%H:%M") %></div>
+				</li>
 			</ul>
 		<% end %>
+		<% else %>
+		<h4>投稿はありません</h4>
+		<% end %>
+		<%= paginate @category_posts, class: "paginate" %>
+	</main>
+
+	<div class="category-sidebar">
+		<div class="category-sidebar3">
+			<h3><i class="fas fa-book-reader"></i> カテゴリ一別検索</h3>
+				<% @categories.each do |category| %>
+					<ul>
+						<li><%= link_to category.category_name, user_category_path(category) %>(
+							<%= category.posts.count %> )</li>
+					</ul>
+				<% end %>
+		</div>
 	</div>
 </div>

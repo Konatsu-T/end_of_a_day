@@ -1,26 +1,28 @@
-<h2>ユーザ情報詳細</h2>
+<div class="container center">
+	<h2><i class="fas fa-star"></i> ユーザ情報詳細</h2>
+		<%= flash[:user_edit] %>
+		<div class="profile">
+			<label><%= attachment_image_tag @user, :profile_image, :fill, 100, 100, fallback: ".no_imagejpg", size: '100x100' %></label>
 
+			<dl class="txtwrap2">
+				<dt class="mypage-title">会員ID</dt>
+				<dd class="mypage-body"><%= @user.id %></dd>
 
-<label>会員ID</label>
-<%= @user.id %><br>
+				<dt class="mypage-title">ステータス</dt>
+					<dd class="mypage-body">
+					<% case @user.deleted? when false %>有効会員
+					<% when true %>退会済
+					<% end %>
+					</dd>
+				<dt class="mypage-title">ユーザ名</dt>
+					<dd class="mypage-body"><%= @user.name %></dd>
 
-<label>ステータス</label>
-<% case @user.deleted? when false %>
-有効会員
-<% when true %>
-退会済
-<% end %><br>
-
-<label><%= attachment_image_tag @user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg", size: '100x100' %></label><br>
-
-<label>ユーザ名</label>
-<%= @user.name %><br>
-
-<label>自己紹介</label>
-<%= @user.introduction %><br>
-
-<label>メールアドレス</label>
-<%= @user.email %><br>
-
-<%= link_to "編集ページへ", edit_admin_user_path(@user) %><br>
-<%= link_to "投稿一覧ページへ", admin_personal_post_path(@user) %>
+				<dt class="mypage-title">自己紹介</dt>
+					<dd class="mypage-body"><%= simple_format(@user.introduction) %></dd>
+				<dt class="mypage-title">メールアドレス</dt>
+					<dd class="mypage-body"><%= @user.email %></dd>
+				<dt class="mypage-title"><%= link_to "編集ページへ", edit_admin_user_path(@user) %></dt>
+				<dt class="mypage-title"><%= link_to "投稿一覧ページへ", admin_personal_post_path(@user) %></dt>
+			</dl>
+		</div>
+</div>

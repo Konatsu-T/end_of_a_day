@@ -2,7 +2,7 @@
 	<h2><i class="fas fa-handshake"></i> Follow Users</h2><br>
 </div>
 
-<div class="container">
+<div class="container follow">
 	<% if @users.count > 0 %>
 		<table class="table">
 		<thead>
@@ -15,8 +15,8 @@
 		<tbody>
 		<% @users.each do |user| %>
 			<tr>
-				<td><%= attachment_image_tag user, :profile_image, :fill, 80, 80, fallback: "no_image.jpg", size: '80x80' %></td>
-				<td><%= user.name %> さん</td>
+				<td><%= attachment_image_tag user, :profile_image, :fill, 70, 70, fallback: "no_image.jpg", size: '70x70' %></td>
+				<td><%= user.name %></td>
 				<td><%= link_to "詳細を見る", user_user_path(user) %></td>
 			</tr>
 		<% end %>

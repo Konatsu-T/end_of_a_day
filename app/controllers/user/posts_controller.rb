@@ -1,11 +1,12 @@
 class User::PostsController < ApplicationController
+	before_action :authenticate_user!, only: [:new, :personal_post]
 	def new
 		@post = Post.new
 		@posting_category = Category.where(category_status: :掲載中)
 	end
 
 	def index
-		@posts = Post.all
+		@posts = Post.page(params[:page]).reverse_order
 		@categories = Category.where(category_status: :掲載中)
 		# ランキングの表示
 		@all_ranks = Post.find(Favorite.group(:post_id).order(Arel.sql('count(post_id) desc')).limit(5).pluck(:post_id))
@@ -20,7 +21,7 @@ class User::PostsController < ApplicationController
 	# 各ユーザごとの投稿一覧
 	def personal_post
 		@user = User.find(params[:id])
-		@posts = Post.all
+		@posts = @user.posts.page(params[:page]).reverse_order
 	end
 
 	def create
@@ -28,7 +29,8 @@ class User::PostsController < ApplicationController
 		@posting_category = Category.where(category_status: :掲載中)
 		@post.user_id = current_user.id
 		if @post.save
-			redirect_to user_post_path(@post), notice: "投稿しました！"
+			redirect_to user_post_path(@post)
+			flash[:post] = "投稿しました！"
 		else
 			render :new
 		end
@@ -44,6 +46,7 @@ class User::PostsController < ApplicationController
 		@posting_category = Category.where(category_status: :掲載中)
 		if @post.update(post_params)
 			redirect_to user_post_path(@post)
+			flash[:post_edit] = "投稿を編集しました！"
 		else
 			render :edit
 		end

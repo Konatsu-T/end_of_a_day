@@ -1,25 +1,28 @@
 <div class="container center">
 
-	<h2><i class="fab fa-pagelines"></i> 投稿詳細ページ(仮)</h2>
+	<h2><i class="fab fa-pagelines"></i> <%= @post.user.name %>さんの投稿</h2>
 
-	<%= flash[:notice] %><br>
+	<%= flash[:post] %><br>
+	<%= flash[:post_edit] %><br>
 
 	<div class="word-box">
 		<div class="personal-word"><%= @post.title %></div>
-		<div class="personal-word2"><%= @post.body %></div>
-		<div class="personal-word2">カテゴリー：<%= @post.category.category_name %></div>
-		<div class="personal-word2">ユーザ：<%= link_to @post.user.name, user_user_path(@post.user) %></div>
+		<div class="personal-word1"><%= simple_format(@post.body) %></div>
+		<div class="personal-word2">カテゴリー：<%= link_to @post.category.category_name, user_category_path(@post.category) %><br>
+		ユーザ：<%= link_to @post.user.name, user_user_path(@post.user) %><br>
+		</div>
 		<!-- いいね機能 ここから-->
-		<div id="post_<%= @post.id %>">
-			<%= render 'user/posts/favorite', post: @post %>
+		<div id="post_<%= @post.id %>"><%= render 'user/posts/favorite', post: @post %>
 		</div>
 	</div>
 
 	<!-- 編集ボタン・削除ボタンの表示 -->
-	<% if @post.user == current_user %>
-		<p><%= link_to "編集する", edit_user_post_path(@post) %> | 
-		<%= link_to "削除する", user_post_path(@post), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"} %></p>
-	<% end %>
+	<div class="personal-word2">
+		<% if @post.user == current_user %>
+		<%= link_to "編集する", edit_user_post_path(@post) %> | 
+		<%= link_to "削除する", user_post_path(@post), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"} %>
+		<% end %>
+	</div>
 
 	<!-- コメントが空白の場合のエラーメッセージ -->
 	<% if @post_comment.errors.any? %>

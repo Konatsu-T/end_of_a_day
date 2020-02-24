@@ -1,51 +1,87 @@
 <div  class="container center">
 	<h2><%= image_tag("heart.png", size: '30x30', class: "heart") %> ABOUT</h2>
+
+<div class="about-box">
+  <div class="about-img">
+    <p><%= image_tag("about1.jpeg", size: '450x290', class: "about-pic") %></p>
+  </div>
+  <div class="about-txt">
+    <h3>誰かの心に寄り添えるような言葉を届けよう</h3>
+    <p class="txt">誰にでも心に残る言葉があるのではないでしょうか。それは歴史上の偉人の名言だけでなく、家族・友人など身近な人の一言に元気をもらったり救われたり・・このような経験も多くあるかと思います。ステキな言葉に出会った日、１日を振り返り、その言葉を共有しあうことで、心を癒し元気を補給できるきっかけになればという想いを込めました。</p>
+  </div>
+</div>
+<div class="about-box">
+  <div class="about-img">
+    <p><%= image_tag("about2.jpeg", size: '450x290', class: "about-pic") %></p>
+  </div>
+  <div class="about-txt">
+    <h3>サイトの使い方</h3>
+    <p class="txt">笑顔や元気をくれた言葉・背中を押してもらった言葉・感動した言葉など、ご自身のエピソードとともに投稿してください。
+		もちろん、SNSや本で見つけた有名人などの言葉でもOKです。投稿された言葉にはコメントやリアクションが残せたり、検索もできます。自分自身のできごとが、誰かの一日を少しだけ良い日に変えられるとしたら幸せですよね！ステキな言葉が溢れるコミュニティとなりますように。</p>
+  </div>
 </div>
 
-<ul class="about">
-	<li class="about-title"></li>
-		<p><%= image_tag("about1.jpeg", size: '480x320', class: "about-pic") %></p>
-		<p>誰かの心に寄り添えるような言葉を届けよう</p>
-		<p class="about-txt">誰にでも心に残る言葉があるのではないでしょうか。それは歴史上の偉人の名言だけでなく、家族・友人など身近な人の一言に元気をもらったり救われたり・・このような経験も多くあるかと思います。ステキな言葉に出会った日、１日を振り返り、その言葉を共有しあうことで、心を癒し元気を補給できるきっかけになればという想いを込めました。</p>
-	<li class="about-title"></li>
-		<p><%= image_tag("about2.jpeg", size: '480x320', class: "about-pic") %></p>
-		<p>サイトの使い方</p>
-		<p class="about-txt">笑顔や元気をくれた言葉・背中を押してもらった言葉・感動した言葉など、ご自身のエピソードとともに投稿してください。
-		もちろん、SNSや本で見つけた有名人などの言葉でもOKです。投稿された言葉にはコメントやリアクションが残せたり、検索もできます。自分自身のできごとが、誰かの一日を少しだけ良い日に変えられるとしたら幸せですよね！ステキな言葉が溢れるコミュニティとなりますように。</p>
-</ul>
+</div>
 
 
 <style>
+  .heart {
+  		vertical-align: bottom;
+  	}
+  .about-box {
+    display: flex;
+    padding:20px;
+    margin: 20px;
+  }
+  .abou-box .about-img {
+    margin: 0 20px 0 0;
+  }
+  .about-box:nth-child(even) {
+    flex-direction: row-reverse;
+    margin: 20px;
+  }
+  .about-box:nth-child(even) .about-img {
+    margin: 0 0 0 20px;
+  }
+  .about-txt{
+    width:calc(100% - 320px);
+    padding: 25px 10px 10px 10px;
+  }
+  .txt {
+  	line-height: 2;
+  	padding: 20px;
+  }
+  .about-img {
+    display: flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .about-pic {
+  	box-shadow: 0 8px 8px rgba(0, 0, 0, 0.14);
+  	border-radius: 18px;
+  }
 
-	.heart {
-		vertical-align: bottom;
-	}
- 	.about {
-        max-width: 600px;
-        font-family: 'Noto Sans JP', sans-serif;
+  @media screen and (max-width: 480px) {
+    .about-box {
+      display: block;
     }
-
-    .about .about-title {
-        display: flex;
-        align-items: center;
+    .about-img {
+      align-items:center;
+      justify-content:center;
     }
-
-    .about .about-title .about-pic,
-    .about .about-title .about-txt {
-        width: 50%;
-        box-sizing: border-box;
+    .about-txt {
+      width: 100%;
+      padding: 5px;
     }
-
-    .about .about-title:nth-child(odd) {
-        flex-direction: row-reverse;
+    .about-txt h3 {
+      font-size: 1.4em;
     }
-
-     .about .about-title:nth-child(odd) .about-txt {
-        padding-right: 10px;
+    .about-box:nth-child(even) .about-img {
+      margin: 0 auto;
     }
-
-    .about .about-title:nth-child(even) .about-txt {
-        padding-right: 10px;
+    .txt {
+      padding: 20px 0 0 20px;
     }
+  }
 </style>
 

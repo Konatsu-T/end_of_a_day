@@ -1,16 +1,16 @@
 <!-- コメント件数 -->
 <div class="comment-count"><i class="far fa-comments"></i> コメント数：<%= post_comments.count %></div>
-
 <!-- コメント一覧 -->
+<%= flash[:comment] %>
 <div class="post-comment">
-<% post_comments.each do |post_comment| %>
-	<p><%= attachment_image_tag post_comment.user, :profile_image, :fill, 30, 30, fallback: "no_image.jpg", size: '30x30' %>
-	<%= post_comment.user.name %>さん</p>
-	<p><%= post_comment.comment %>
-	(<%= post_comment.created_at.strftime('%Y/%m/%d %H:%M:%S') %>)
-	<% if current_user == post_comment.user %>
-		<%= link_to "削除",  user_post_post_comment_path(post_comment.post_id, post_comment.id, ), method: :delete, remote: true, data: { confirm: '削除してよろしいですか？' } %>
+	<% post_comments.each do |post_comment| %>
+		<p><%= attachment_image_tag post_comment.user, :profile_image, :fill, 30, 30, fallback: "no_image.jpg", size: '30x30' %>
+		<%= post_comment.user.name %>さん</p>
+		<p class="comment-txt"><%= post_comment.comment %>
+		(<%= post_comment.created_at.strftime('%Y/%m/%d %H:%M:%S') %>)
+		<% if current_user == post_comment.user %>
+			<%= link_to "削除",  user_post_post_comment_path(post_comment.post_id, post_comment.id, ), method: :delete, remote: true, data: { confirm: '削除してよろしいですか？' } %>
+		<% end %>
+		</p>
 	<% end %>
-	</p>
-<% end %>
 </div>

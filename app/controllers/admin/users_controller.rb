@@ -20,6 +20,7 @@ class Admin::UsersController < ApplicationController
 		 # 有効会員にする（論理削除を取り消す）
 		 @user.restore
 		 redirect_to admin_user_path(@user)
+		 flash[:user_edit] = "ユーザ情報を変更しました"
 		# 退会済みにする（論理削除）
 		when "1"
 		 @user.destroy
